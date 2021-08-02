@@ -34,7 +34,7 @@ class Client:
 
     def generate_authenticity(self):
         response = requests.get('https://twitter.com/account/begin_password_reset')
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, "html.parser")
         authenticity_token = soup.find(attrs={'name':'authenticity_token'}).get('value')
 
         return authenticity_token
@@ -305,7 +305,7 @@ class API(object):
 
     def Login(session_u, session_p):
         response = requests.get('https://twitter.com/account/begin_password_reset')
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, "html.parser")
         authenticity = soup.find(attrs={'name':'authenticity_token'}).get('value')
 
         headers = {
@@ -338,7 +338,7 @@ class API(object):
 
     def generate_authenticity(self):
         response = requests.get('https://twitter.com/account/begin_password_reset')
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, "html.parser")
         authenticity_token = soup.find(attrs={'name':'authenticity_token'}).get('value')
 
         return authenticity_token
@@ -954,7 +954,7 @@ class API(object):
     def Twitter_Web_Client(self, text, place_id="", authenticity_token=None):
         if authenticity_token == None:
             response = requests.get('https://twitter.com/account/begin_password_reset')
-            soup = BeautifulSoup(response.text, "lxml")
+            soup = BeautifulSoup(response.text, "html.parser")
             authenticity_token = soup.find(attrs={'name':'authenticity_token'}).get('value')
             data = {
               'authenticity_token': authenticity_token,
