@@ -14,17 +14,18 @@ class TwitterError(Exception):
 ###ログイン無し情報取得###
 
 class Client:
-    headers = {
-        'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
-        'User-Agent': ua.ie
-    }
-    guest_token = requests.post('https://api.twitter.com/1.1/guest/activate.json', headers=headers).json()["guest_token"]
+    def __init__(self):
+        headers = {
+            'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
+            'User-Agent': ua.ie
+        }
+        guest_token = requests.post('https://api.twitter.com/1.1/guest/activate.json', headers=headers).json()["guest_token"]
 
-    headers = {
-        'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
-        'x-guest-token': guest_token,
-        'User-Agent': ua.ie
-    }
+        self.headers = {
+            'authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA',
+            'x-guest-token': guest_token,
+            'User-Agent': ua.ie
+        }
 
     def generate_ct0(self):
         response = requests.get('https://twitter.com/i/release_notes')
